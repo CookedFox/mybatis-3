@@ -47,6 +47,9 @@ public class UnpooledDataSource implements DataSource {
   private String username;
   private String password;
 
+  /**
+   * jdbc 事务相关配置
+   */
   private Boolean autoCommit;
   private Integer defaultTransactionIsolationLevel;
   private Integer defaultNetworkTimeout;
