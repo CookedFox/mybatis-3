@@ -100,6 +100,13 @@ public class XMLConfigBuilder extends BaseBuilder {
     return configuration;
   }
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/5/15 23:05
+   *
+   * 实际进行parse的方法
+   */
   private void parseConfiguration(XNode root) {
     try {
       // issue #117 read properties first
@@ -107,6 +114,7 @@ public class XMLConfigBuilder extends BaseBuilder {
       Properties settings = settingsAsProperties(root.evalNode("settings"));
       loadCustomVfs(settings);
       loadCustomLogImpl(settings);
+      // TODO
       typeAliasesElement(root.evalNode("typeAliases"));
       pluginElement(root.evalNode("plugins"));
       objectFactoryElement(root.evalNode("objectFactory"));
@@ -129,6 +137,13 @@ public class XMLConfigBuilder extends BaseBuilder {
     }
     Properties props = context.getChildrenAsProperties();
     // Check that all settings are known to the configuration class
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/5/15 23:05
+     *
+     * Validator
+     */
     MetaClass metaConfig = MetaClass.forClass(Configuration.class, localReflectorFactory);
     for (Object key : props.keySet()) {
       if (!metaConfig.hasSetter(String.valueOf(key))) {

@@ -47,7 +47,11 @@ public class UnpooledDataSource implements DataSource {
   private String username;
   private String password;
 
-  /**
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/5/15 23:08
+   *
    * jdbc 事务相关配置
    */
   private Boolean autoCommit;

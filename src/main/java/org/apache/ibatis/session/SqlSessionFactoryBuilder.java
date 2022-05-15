@@ -92,6 +92,14 @@ public class SqlSessionFactoryBuilder {
     }
   }
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/5/15 23:07
+   *
+   * xml配置文件 -> 内存数据结构
+   * 内存数据 -> SqlSessionFactory
+   */
   public SqlSessionFactory build(Configuration config) {
     return new DefaultSqlSessionFactory(config);
   }

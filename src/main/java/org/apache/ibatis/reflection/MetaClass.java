@@ -31,6 +31,15 @@ import org.apache.ibatis.reflection.property.PropertyTokenizer;
  */
 public class MetaClass {
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/5/15 23:06
+   *
+   * Reflector工厂
+   * 每个type（class）对应一个Reflector
+   * 可以选择缓存或者新建
+   */
   private final ReflectorFactory reflectorFactory;
   private final Reflector reflector;
 
