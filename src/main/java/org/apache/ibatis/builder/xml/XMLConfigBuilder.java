@@ -114,12 +114,29 @@ public class XMLConfigBuilder extends BaseBuilder {
       Properties settings = settingsAsProperties(root.evalNode("settings"));
       loadCustomVfs(settings);
       loadCustomLogImpl(settings);
-      // TODO
       typeAliasesElement(root.evalNode("typeAliases"));
+
+      /*
+       * @note
+       * @author CookedFox
+       * @date 2022/5/17 10:36 PM
+       *
+       * plugin mechanism
+       * 四类扩展接口，作用不同的生命周期
+       * 有相同的注册时机和实例化机制
+       */
       pluginElement(root.evalNode("plugins"));
       objectFactoryElement(root.evalNode("objectFactory"));
       objectWrapperFactoryElement(root.evalNode("objectWrapperFactory"));
       reflectorFactoryElement(root.evalNode("reflectorFactory"));
+
+      /*
+       * @note
+       * @author CookedFox
+       * @date 2022/5/17 10:49 PM
+       *
+       * 应用配置
+       */
       settingsElement(settings);
       // read it after objectFactory and objectWrapperFactory issue #631
       environmentsElement(root.evalNode("environments"));

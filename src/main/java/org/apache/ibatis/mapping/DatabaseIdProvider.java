@@ -20,6 +20,13 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+/*
+ * @note
+ * @author CookedFox
+ * @date 2022/5/17 11:02 PM
+ *
+ * 支持多种数据库？
+ */
 /**
  * Should return an id to identify the type of this database.
  * That id can be used later on to build different queries for each database type
