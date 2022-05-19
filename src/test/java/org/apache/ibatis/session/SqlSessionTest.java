@@ -115,6 +115,7 @@ class SqlSessionTest extends BaseDataTest {
       assertTrue(e.getMessage().contains("ambiguous"));
     }
 
+    Assertions.assertThrows(IllegalArgumentException.class, ()->c.getCache(shortName));
   }
 
   @Test
@@ -151,6 +152,7 @@ class SqlSessionTest extends BaseDataTest {
     }
   }
 
+  // TODO
   @Test
   void shouldSelectAllAuthors() {
     try (SqlSession session = sqlMapper.openSession(TransactionIsolationLevel.SERIALIZABLE)) {
