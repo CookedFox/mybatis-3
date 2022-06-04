@@ -152,7 +152,6 @@ class SqlSessionTest extends BaseDataTest {
     }
   }
 
-  // TODO
   @Test
   void shouldSelectAllAuthors() {
     try (SqlSession session = sqlMapper.openSession(TransactionIsolationLevel.SERIALIZABLE)) {
@@ -216,6 +215,13 @@ class SqlSessionTest extends BaseDataTest {
     }
   }
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/4 10:07 PM
+   *
+   * xml配置的resultType使用construct
+   */
   @Test
   void shouldSelectOneImmutableAuthor() {
     try (SqlSession session = sqlMapper.openSession()) {

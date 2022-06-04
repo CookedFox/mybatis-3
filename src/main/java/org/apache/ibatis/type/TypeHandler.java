@@ -25,6 +25,13 @@ import java.sql.SQLException;
  */
 public interface TypeHandler<T> {
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/4 11:28 PM
+   *
+   * PreparedStatement#setParameter
+   */
   void setParameter(PreparedStatement ps, int i, T parameter, JdbcType jdbcType) throws SQLException;
 
   /**
@@ -40,6 +47,13 @@ public interface TypeHandler<T> {
    */
   T getResult(ResultSet rs, String columnName) throws SQLException;
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/4 11:31 PM
+   *
+   * ResultSet#getXXX
+   */
   T getResult(ResultSet rs, int columnIndex) throws SQLException;
 
   T getResult(CallableStatement cs, int columnIndex) throws SQLException;

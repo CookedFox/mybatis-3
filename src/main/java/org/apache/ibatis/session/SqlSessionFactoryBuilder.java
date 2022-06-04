@@ -32,6 +32,14 @@ import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
  */
 public class SqlSessionFactoryBuilder {
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/4 10:39 PM
+   *
+   * 相当于为DefaultSqlSessionFactory提供多种构造方法，从原类抽离方法可以降低单个类的复杂度
+   */
+
   public SqlSessionFactory build(Reader reader) {
     return build(reader, null, null);
   }

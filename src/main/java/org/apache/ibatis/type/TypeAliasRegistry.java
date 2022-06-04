@@ -37,6 +37,13 @@ import org.apache.ibatis.io.Resources;
  */
 public class TypeAliasRegistry {
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/4 10:55 PM
+   *
+   * 类型别名注册中心（Map get/put）
+   */
   private final Map<String, Class<?>> typeAliases = new HashMap<>();
 
   public TypeAliasRegistry() {

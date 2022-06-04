@@ -54,6 +54,14 @@ import org.apache.ibatis.session.Configuration;
  */
 public final class TypeHandlerRegistry {
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/4 11:39 PM
+   *
+   * JdbcType对应单个基本数据类型
+   * Type对应组合复杂类型
+   */
   private final Map<JdbcType, TypeHandler<?>> jdbcTypeHandlerMap = new EnumMap<>(JdbcType.class);
   private final Map<Type, Map<JdbcType, TypeHandler<?>>> typeHandlerMap = new ConcurrentHashMap<>();
   private final TypeHandler<Object> unknownTypeHandler;
