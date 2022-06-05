@@ -32,6 +32,15 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
  * @author Clinton Begin
  */
 public abstract class BaseBuilder {
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/5 10:34
+   *
+   * 如果Configuration是全局共享的配置
+   * 那这个BaseBuilder中的方法是否可以放进Configuration类中，或者单独放进工具类中
+   * 选择继承的目的是？？？
+   */
   protected final Configuration configuration;
   protected final TypeAliasRegistry typeAliasRegistry;
   protected final TypeHandlerRegistry typeHandlerRegistry;
