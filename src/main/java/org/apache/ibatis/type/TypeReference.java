@@ -27,6 +27,13 @@ import java.lang.reflect.Type;
  */
 public abstract class TypeReference<T> {
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/6 22:22
+   *
+   * 一般情况下得到泛型的类型T
+   */
   private final Type rawType;
 
   protected TypeReference() {
