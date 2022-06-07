@@ -28,6 +28,13 @@ import java.sql.SQLXML;
  * @author Iwao AVE!
  */
 public class SqlxmlTypeHandler extends BaseTypeHandler<String> {
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/7 21:00
+   *
+   * 目前，只有特定于供应商的技术和数据类型可用于在关系数据库中存储 XML 文档。
+   */
 
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, String parameter, JdbcType jdbcType)

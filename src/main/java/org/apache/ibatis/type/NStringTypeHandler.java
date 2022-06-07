@@ -25,6 +25,16 @@ import java.sql.SQLException;
  */
 public class NStringTypeHandler extends BaseTypeHandler<String> {
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/7 20:54
+   *
+   * char 类型是一个字节 char（8）只能存8字母
+   * nchar 类型是双字节 nchar（8）能存8个汉字
+   * varchar 类型是可变的、即如果 varchar（8）你只存了一个字母、在内存中只占一个字节
+   * char 类型如果 char（8）你只存了一个字母、在内存中也占8个字节
+   */
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, String parameter, JdbcType jdbcType)
       throws SQLException {

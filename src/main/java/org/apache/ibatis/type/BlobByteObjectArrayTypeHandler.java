@@ -30,6 +30,13 @@ public class BlobByteObjectArrayTypeHandler extends BaseTypeHandler<Byte[]> {
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, Byte[] parameter, JdbcType jdbcType)
       throws SQLException {
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/6/7 20:11
+     *
+     * 包装类型Byte转成基本数据类型byte
+     */
     ByteArrayInputStream bis = new ByteArrayInputStream(ByteArrayUtils.convertToPrimitiveArray(parameter));
     ps.setBinaryStream(i, bis, parameter.length);
   }
@@ -58,6 +65,13 @@ public class BlobByteObjectArrayTypeHandler extends BaseTypeHandler<Byte[]> {
   private Byte[] getBytes(Blob blob) throws SQLException {
     Byte[] returnValue = null;
     if (blob != null) {
+      /*
+       * @note
+       * @author CookedFox
+       * @date 2022/6/7 20:12
+       *
+       * 基本数据类型byte转成包装类型Byte
+       */
       returnValue = ByteArrayUtils.convertToObjectArray(blob.getBytes(1, (int) blob.length()));
     }
     return returnValue;

@@ -24,7 +24,15 @@ import java.sql.SQLException;
  * @author Clinton Begin
  */
 public class EnumOrdinalTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E> {
-
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/7 20:25
+   *
+   * <E extends<E>> E是枚举类的类型
+   * enum 枚举类的类型
+   * 把枚举转换成int类型，java枚举自带的序号
+   */
   private final Class<E> type;
   private final E[] enums;
 
@@ -33,6 +41,13 @@ public class EnumOrdinalTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E
       throw new IllegalArgumentException("Type argument cannot be null");
     }
     this.type = type;
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/6/7 20:29
+     *
+     * 返回所有的枚举值
+     */
     this.enums = type.getEnumConstants();
     if (this.enums == null) {
       throw new IllegalArgumentException(type.getSimpleName() + " does not represent an enum type.");

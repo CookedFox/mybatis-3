@@ -31,6 +31,13 @@ import org.apache.ibatis.session.Configuration;
  * @author Clinton Begin
  */
 public class UnknownTypeHandler extends BaseTypeHandler<Object> {
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/7 21:39
+   *
+   * 可以根据传参找到一个之前注册过的类型处理器并由它来处理
+   */
 
   private static final ObjectTypeHandler OBJECT_TYPE_HANDLER = new ObjectTypeHandler();
   // TODO Rename to 'configuration' after removing the 'configuration' property(deprecated property) on parent class
@@ -45,6 +52,13 @@ public class UnknownTypeHandler extends BaseTypeHandler<Object> {
    */
   public UnknownTypeHandler(Configuration configuration) {
     this.config = configuration;
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/6/7 21:18
+     *
+     * 方法引用
+     */
     this.typeHandlerRegistrySupplier = configuration::getTypeHandlerRegistry;
   }
 
@@ -95,6 +109,13 @@ public class UnknownTypeHandler extends BaseTypeHandler<Object> {
     if (parameter == null) {
       handler = OBJECT_TYPE_HANDLER;
     } else {
+      /*
+       * @note
+       * @author CookedFox
+       * @date 2022/6/7 21:25
+       *
+       * 到类型处理器注册中心里面看看这个parameter类型有没有注册过TypeHandler
+       */
       handler = typeHandlerRegistrySupplier.get().getTypeHandler(parameter.getClass(), jdbcType);
       // check if handler is null (issue #270)
       if (handler == null || handler instanceof UnknownTypeHandler) {
@@ -110,6 +131,13 @@ public class UnknownTypeHandler extends BaseTypeHandler<Object> {
       columnIndexLookup = new HashMap<>();
       ResultSetMetaData rsmd = rs.getMetaData();
       int count = rsmd.getColumnCount();
+      /*
+       * @note
+       * @author CookedFox
+       * @date 2022/6/7 21:32
+       *
+       * 使用列标签代替列名
+       */
       boolean useColumnLabel = config.isUseColumnLabel();
       for (int i = 1; i <= count; i++) {
         String name = useColumnLabel ? rsmd.getColumnLabel(i) : rsmd.getColumnName(i);
@@ -130,7 +158,21 @@ public class UnknownTypeHandler extends BaseTypeHandler<Object> {
   }
 
   private TypeHandler<?> resolveTypeHandler(ResultSetMetaData rsmd, Integer columnIndex) {
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/6/7 21:35
+     *
+     * ResultSetMetaData 是ResultSet的元数据，拿到了查询结果的列和下标
+     */
     TypeHandler<?> handler = null;
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/6/7 21:37
+     *
+     * 分别获取到jdbc中的数据类型（数据库）和对应java中的类
+     */
     JdbcType jdbcType = safeGetJdbcTypeForColumn(rsmd, columnIndex);
     Class<?> javaType = safeGetClassForColumn(rsmd, columnIndex);
     if (javaType != null && jdbcType != null) {

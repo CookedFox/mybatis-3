@@ -36,6 +36,13 @@ public class EnumTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E> {
 
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, E parameter, JdbcType jdbcType) throws SQLException {
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/6/7 20:33
+     *
+     * TODO 这里为啥要这么搞？这里jdbcType起作用？r3589
+     */
     if (jdbcType == null) {
       ps.setString(i, parameter.name());
     } else {

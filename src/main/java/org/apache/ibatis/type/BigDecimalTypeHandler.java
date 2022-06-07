@@ -25,7 +25,13 @@ import java.sql.SQLException;
  * @author Clinton Begin
  */
 public class BigDecimalTypeHandler extends BaseTypeHandler<BigDecimal> {
-
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/7 20:06
+   *
+   * 看着就是对这个泛型类型的setParameter和getParameter
+   */
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, BigDecimal parameter, JdbcType jdbcType)
       throws SQLException {
@@ -44,6 +50,13 @@ public class BigDecimalTypeHandler extends BaseTypeHandler<BigDecimal> {
     return rs.getBigDecimal(columnIndex);
   }
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/7 20:05
+   *
+   * CallableStatement 调用数据库中存储过程的接口
+   */
   @Override
   public BigDecimal getNullableResult(CallableStatement cs, int columnIndex)
       throws SQLException {
