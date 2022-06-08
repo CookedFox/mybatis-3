@@ -90,6 +90,13 @@ public @interface CacheNamespace {
    *
    * @return {@code true} if block the cache; {@code false} if otherwise
    */
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/8 22:58
+   *
+   * BlockingCache
+   */
   boolean blocking() default false;
 
   /**
