@@ -37,6 +37,13 @@ import org.apache.ibatis.transaction.Transaction;
  */
 public class ManagedTransaction implements Transaction {
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/8 23:29
+   *
+   * 这里看着好像没有利用jdbc来做事务
+   */
   private static final Log log = LogFactory.getLog(ManagedTransaction.class);
 
   private DataSource dataSource;
