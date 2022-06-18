@@ -37,6 +37,13 @@ import org.apache.ibatis.transaction.TransactionException;
  * @see JdbcTransactionFactory
  */
 public class JdbcTransaction implements Transaction {
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/8 23:17
+   *
+   * 所谓Jdbc事务就是用Connection里面的一些API来完成事务操作
+   */
 
   private static final Log log = LogFactory.getLog(JdbcTransaction.class);
 

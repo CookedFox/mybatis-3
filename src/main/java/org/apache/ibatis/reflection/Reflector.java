@@ -53,6 +53,13 @@ import org.apache.ibatis.util.MapUtil;
  */
 public class Reflector {
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/5 12:22
+   *
+   * 将某个具体的方法映射到MethodHandle上，通过MethodHandle直接调用该句柄所引用的底层方法
+   */
   private static final MethodHandle isRecordMethodHandle = getIsRecordMethodHandle();
   private final Class<?> type;
   private final String[] readablePropertyNames;
@@ -93,6 +100,13 @@ public class Reflector {
 
   private void addDefaultConstructor(Class<?> clazz) {
     Constructor<?>[] constructors = clazz.getDeclaredConstructors();
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/6/5 12:42
+     *
+     * 任取一个无参构造方法赋值给成员变量
+     */
     Arrays.stream(constructors).filter(constructor -> constructor.getParameterTypes().length == 0)
       .findAny().ifPresent(constructor -> this.defaultConstructor = constructor);
   }
@@ -308,6 +322,13 @@ public class Reflector {
 
   private void addUniqueMethods(Map<String, Method> uniqueMethods, Method[] methods) {
     for (Method currentMethod : methods) {
+      /*
+       * @note
+       * @author CookedFox
+       * @date 2022/6/5 13:01
+       *
+       * 由编译器自动生成的方法,了使Java的泛型方法生成的字节码和 1.5 版本前的字节码相兼容，
+       */
       if (!currentMethod.isBridge()) {
         String signature = getSignature(currentMethod);
         // check to see if the method is already known
@@ -321,6 +342,13 @@ public class Reflector {
   }
 
   private String getSignature(Method method) {
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/6/5 13:06
+     *
+     * e.g. java.lang.String#getSignature:java.lang.reflect.Method
+     */
     StringBuilder sb = new StringBuilder();
     Class<?> returnType = method.getReturnType();
     if (returnType != null) {
@@ -471,6 +499,18 @@ public class Reflector {
   }
 
   private static MethodHandle getIsRecordMethodHandle() {
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/6/5 12:24
+     *
+     * MethodType.methodType(boolean.class) 返回类型是boolean.class类型的方法
+     * findStatic 对应字节码:invokestatic 调用静态方法
+     * findSpecial 对应字节码:invokespecial 调用实例构造方法，私有方法，父类方法
+     * findVirtual 对应字节码:invokevirtual 调用所有的虚方法
+     * invokeInterface 对应字节码:invokeinterface 调用接口方法，会在运行时再确定一个实现此接口的对象
+     * Java虚方法你可以理解为java里所有被overriding的方法都是virtual的,所有重写的方法都是override的。
+     */
     MethodHandles.Lookup lookup = MethodHandles.lookup();
     MethodType mt = MethodType.methodType(boolean.class);
     try {

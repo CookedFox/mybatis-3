@@ -25,6 +25,13 @@ import java.util.Set;
  * @author Clinton Begin
  */
 public class SimpleTypeRegistry {
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/7 21:13
+   *
+   * known common type 通用的类型
+   */
 
   private static final Set<Class<?>> SIMPLE_TYPE_SET = new HashSet<>();
 

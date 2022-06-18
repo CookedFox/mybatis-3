@@ -197,6 +197,13 @@ public final class TypeHandlerRegistry {
     this.defaultEnumTypeHandler = typeHandler;
   }
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/7 21:59
+   *
+   * contains
+   */
   public boolean hasTypeHandler(Class<?> javaType) {
     return hasTypeHandler(javaType, null);
   }
@@ -213,6 +220,13 @@ public final class TypeHandlerRegistry {
     return javaTypeReference != null && getTypeHandler(javaTypeReference, jdbcType) != null;
   }
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/7 22:01
+   *
+   * Map<Class<? extends TypeHandler<?>>, TypeHandler<?>>>
+   */
   public TypeHandler<?> getMappingTypeHandler(Class<? extends TypeHandler<?>> handlerType) {
     return allTypeHandlersMap.get(handlerType);
   }
@@ -225,6 +239,13 @@ public final class TypeHandlerRegistry {
     return getTypeHandler(javaTypeReference, null);
   }
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/7 22:12
+   *
+   * jdbcType的TypeHandler专门放的地方
+   */
   public TypeHandler<?> getTypeHandler(JdbcType jdbcType) {
     return jdbcTypeHandlerMap.get(jdbcType);
   }
@@ -239,6 +260,13 @@ public final class TypeHandlerRegistry {
 
   @SuppressWarnings("unchecked")
   private <T> TypeHandler<T> getTypeHandler(Type type, JdbcType jdbcType) {
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/6/7 22:15
+     *
+     * TODO ParamMap的作用还不清楚
+     */
     if (ParamMap.class.equals(type)) {
       return null;
     }
@@ -251,6 +279,13 @@ public final class TypeHandlerRegistry {
       }
       if (handler == null) {
         // #591
+        /*
+         * @note
+         * @author CookedFox
+         * @date 2022/6/7 22:20
+         *
+         * TODO 没搞懂这里想干嘛，有空再看下
+         */
         handler = pickSoleHandler(jdbcHandlerMap);
       }
     }
@@ -261,8 +296,23 @@ public final class TypeHandlerRegistry {
   private Map<JdbcType, TypeHandler<?>> getJdbcHandlerMap(Type type) {
     Map<JdbcType, TypeHandler<?>> jdbcHandlerMap = typeHandlerMap.get(type);
     if (jdbcHandlerMap != null) {
+      /*
+       * @note
+       * @author CookedFox
+       * @date 2022/6/7 22:22
+       *
+       * TODO 这里为什么要用一个emptyMap来判断是否为空啊
+       */
       return NULL_TYPE_HANDLER_MAP.equals(jdbcHandlerMap) ? null : jdbcHandlerMap;
     }
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/6/7 22:25
+     *
+     * 因为Type是一个接口
+     * Class是一个实现了Type接口的类
+     */
     if (type instanceof Class) {
       Class<?> clazz = (Class<?>) type;
       if (Enum.class.isAssignableFrom(clazz)) {
@@ -396,6 +446,13 @@ public final class TypeHandlerRegistry {
     register((Type) type, jdbcType, handler);
   }
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/7 22:51
+   *
+   * 注册的最终实际方法
+   */
   private void register(Type javaType, JdbcType jdbcType, TypeHandler<?> handler) {
     if (javaType != null) {
       Map<JdbcType, TypeHandler<?>> map = typeHandlerMap.get(javaType);
@@ -416,6 +473,13 @@ public final class TypeHandlerRegistry {
 
   public void register(Class<?> typeHandlerClass) {
     boolean mappedTypeFound = false;
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/6/7 22:46
+     *
+     * @MappedTypes注解可以注释在TypeHandler上表示这个类型处理器可以处理的类型
+     */
     MappedTypes mappedTypes = typeHandlerClass.getAnnotation(MappedTypes.class);
     if (mappedTypes != null) {
       for (Class<?> javaTypeClass : mappedTypes.value()) {
@@ -448,6 +512,13 @@ public final class TypeHandlerRegistry {
 
   @SuppressWarnings("unchecked")
   public <T> TypeHandler<T> getInstance(Class<?> javaTypeClass, Class<?> typeHandlerClass) {
+    /*
+     * @note
+     * @author CookedFox
+     * @date 2022/6/7 22:40
+     *
+     * 这个判断是不是很少进啊
+     */
     if (javaTypeClass != null) {
       try {
         Constructor<?> c = typeHandlerClass.getConstructor(Class.class);

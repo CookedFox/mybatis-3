@@ -55,6 +55,14 @@ public abstract class BaseTypeHandler<T> extends TypeReference<T> implements Typ
     this.configuration = c;
   }
 
+  /*
+   * @note
+   * @author CookedFox
+   * @date 2022/6/6 22:35
+   *
+   * 模板方法
+   * setNonNullParameter交由子类实现
+   */
   @Override
   public void setParameter(PreparedStatement ps, int i, T parameter, JdbcType jdbcType) throws SQLException {
     if (parameter == null) {
