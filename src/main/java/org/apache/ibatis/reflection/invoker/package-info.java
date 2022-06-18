@@ -16,4 +16,13 @@
 /**
  * Unused.
  */
+/*
+ * @note
+ * @author CookedFox
+ * @date 2022/6/18 8:32 AM
+ *
+ * 对反射调用方法的封装（Method、Field）
+ * Method#xx.invoke
+ * Filed#xx.set / get
+ */
 package org.apache.ibatis.reflection.invoker;
